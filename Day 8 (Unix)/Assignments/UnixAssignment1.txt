@@ -1,0 +1,59 @@
+1. Create the following files using VI editor
+	a. Index.html -> this should display the header only using H1 tag
+	b. Create a new empty file called Index.css and Index.js
+	c. Create a personclass.py file which creates a class in python. 
+	d. the python class Person should have data members PersonId, 
+		PersonName, Location. 
+	e. create getter and setter methods for each of the fields.
+	f. write a method called show to print all the details
+
+2. Copy the file personclass.py from the current directory to the mycode subdirectory.
+3. List the files in the current directory, in “long listing format”.
+4. List all files, including hidden files, in the /var directory, in reverse alphabetical order and long listing format. (Notice the slash in the directory!)
+5. Rename the file personclass.py to person.py
+
+6. Delete the files Index.html, Index.css and Index.js in a single command
+
+7. The cat command outputs the contents of a file to the terminal. The less command outputs the contents of a file to the terminal, page by page, pausing for you to press a key.
+
+Use whichever command is best suited to display the contents of the file person.py
+
+The head and tail commands output only the first or last few lines (respectively) of a file to the terminal.
+
+Display only the first 7 lines of the file animals.txt from the current directory on the terminal. Create the file if it does not exist and add some 10 animal names, one on each line. 
+
+
+8. List all animals names that begin between [A-N] 
+
+9. List all the lines which contains "Steve" in the file science.txt
+
+10. List all the lines that begin with T in the file science.txt 
+
+11. Make a copy of the file science.txt and move the copy into a new directory "Science" . Create the directory, if required. 
+
+12. Show the first 15 lines from science.txt. 
+
+13. Write a python script to accept 4 numbers from the user, store the items into a list. Collect another input from the user for the multiples value. Based on the input multiples value, extract all elements that are a multiple of the input multiples value. 
+Input Numbers 
+1. 100
+2. 56
+3. 90 
+4. 77
+Multiples value: 10 
+Output: 100, 90 
+
+
+SELF-DISCOVERY
+1. Set the file MyProgram.java to have a last-modified date of January 1, 2020, 4:15am.
+
+Hint: The man page for the proper command describes the timestamp 'STAMP' format to use. Look for this!
+
+2. You can use a * (asterisk) as a “wild-card” character to specify a group of files. For example, *foo means all files whose names end with foo, and foo* means all files whose names begin with foo. You can use a wildcard in the middle of a file name, such as foo*bar for all files that start with foo and end with bar.
+
+List all web page files (files whose names end with the extension .html or .css) in the current directory. Note that the ls command can accept more than one parameter for what files you want it to list (e.g. ls website/ python/).
+
+Copy all the text files (files whose names end with .txt) from the current folder to the python subdirectory.
+
+
+
+Take snapshots of each task command/output and paste it into Word document. Share the word document in the assignments folder. 

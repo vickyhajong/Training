@@ -1,0 +1,22 @@
+TODO: 
+
+1.capture the output of "man sort" into a file. 
+2.sort the lines of file and display pageful
+of information 
+
+3. Display pageful of information by sorting 
+  the output of "man du" 
+  HINT: use pipes and write one line command 
+	man du | sort | less 
+
+grep - Global Regular Expression Patterns 
+-- pattern matching 
+grep is fileName
+
+
+
+
+
+
+
+

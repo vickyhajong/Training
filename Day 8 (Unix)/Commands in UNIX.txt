@@ -1,0 +1,27 @@
+ls
+cd
+pwd
+less
+piping
+find l*
+find /bin/a[c-f]*
+who
+sort filename
+sort -r filename
+man du | sort | less
+grep regularexpression filename
+grep s$ samplefile   ---- '$' for end of line
+grep [a-z]$ samplefile
+grep [s-z.]$ samplefile
+grep [s-z_]$ samplefile
+grep X$ samplefile
+grep s$ sampleFile
+vi 
+i for insert mode
+esc for command mode
+:q to exit
+:w filname to save new file
+esc ZZ for quick save and exit
+
+
+

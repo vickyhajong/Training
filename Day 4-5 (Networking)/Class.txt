@@ -1,0 +1,64 @@
+------Media Acces Control----------------
+        CSMA/CD (Collision detection)
+        CSMS/CSMA (Collision for avoidance)
+        Token passinng
+
+
+_________________________________________
+LAN most common form of computer.
+MAN accross one city
+WAN across geographical locations
+_________________________________________
+Physical components of LAN:
+Network adapter
+wiring
+Hub
+termination point
+Wiring Cabinet
+_________________________________________
+Topologies
+
+BUS
+Ring
+Star
+Hybrid
+Mesh(Full and Partial)
+_____________________________________-_____________________________________
+Physical WAN components
+Bridge
+Router
+Leased line
+Backbone
+______________________________________
+WAN STANDARDS:
+T-carrieer
+E-carrieer
+Optical Carrier (OC - X)
+ISDN
+_____________________________________________
+ISDN
+dial on demand
+for backup connection
+txt,vdo,audo transmission
+
+BRI 128 kbps
+PRI 1.536 Mbps
+______________________________________________
+Wireless Network components:
+Wireless Network adapter
+Access point
+Ad Hoc Network
+Infrastructure Network
+SSID
+
+_____________________________________
+Intranet And Extranet
+Firewall
+Perimeter Networks
+_____________________________________
+Proxy and reverse proxy servers
+
+
+
+
+
