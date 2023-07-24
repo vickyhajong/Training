@@ -1,0 +1,94 @@
+ps1="$ "
+export ps1
+echo
+#!/bin/sh
+# Comment
+; for writing in same line
+read 
+$?
+
+Consditional Statements
+
+1.
+if [ condition ]
+then
+	statement(s)
+fi
+
+2.
+if [ condition ]; then
+	statements(s)
+else
+	statemetns(s)
+fi
+
+3.
+if [ condition ]; then
+	statement(s)
+elif [ condition ]; then
+	statement(s)
+...
+else
+	statement(s)
+fi
+
+4. Case statement
+
+case expr in
+	label) statement(s) ;;
+	label) statement(s) ;;
+	*) statements(s);;
+esac
+
+5. while
+while [ condition ]
+do 
+	statement(s)
+done
+
+6. while : -- runs infinite loops
+while :
+do 
+	statement(s)
+done
+
+7. for statement
+for variable in rangeOfValues 1,2,3,4,5
+do
+	statement(s)
+done
+
+
+
+Passing Arguments to scripts
+- scripts receive the arguments as $0,$1,$2,.....$9
+$0 script name
+$1.....$9 are the arguments
+$@ identifies all the arguments
+$* identifies all the arguments
+
+
+./script1.sh Edgeverve
+$0 script.sh
+$1 Edgeverve
+
+for arg in $*
+do
+	echo "Argument $1"
+	shift
+done
+
+
+
+$$ return process ID
+$! return last background process id
+
+
+
+
+
+
+
+
+
+
