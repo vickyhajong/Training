@@ -9,7 +9,7 @@ do
     while [ $j -lt $c ]
     do
         echo -n "$i "
-        i=`expr $1 + 1`
+        i=`expr $i + 1`
         j=`expr $j + 1`
     done
     echo " "
