@@ -1,0 +1,43 @@
+SQL
+-----------------Structure Query Language------------------------------
+--All RDBMS support SQL specificatons.
+--classified as.
+1. Data manipulation Language (DML).
+	-change/modify or remove data.
+	-INSERT, UPDate, and DELETE.
+2. Date Defination Language (DDL).
+	-defines the strucutre of the data.
+	-CREATE, ALTER, DROP.
+3. Data Retrieval Language (DRL)/Date Query Language (DQL).
+	- extrating data from the DBMS.
+	- SELECT.
+4. Date Control Language (DCL).
+	- granting or removing permissions to users on the data.
+	- access rights for various users over the data
+	- GRANT, REVOKE.
+5. Transaction Control Language (TCL).
+	- ensures that the data is consistent and durable.
+	- every action is axecuted cumpletely or not executed at all.
+	- transaction is an action which makes.
+	- BEGIN TRANS, COMMIT, ROLLBACK, SAVEPOINT
+RDBMS Vendors like Oracle, MySQL, SQL Server,...
+	->provide their own implementation of SQL
+	-> Orcale ->PL/SQL
+	-> SQL Server -> T- SQL
+	-> Built-in functions differ across RDBMS vendors
+
+Every statement taht is excuted fillows a pattern:
+Query engine
+	- parses the query for syntax
+	- resolves the objects that are used by the query [ SYSTEMS.customers ]
+	- optimization of thew query [ generates the execution plan ] - cheapest way
+	- Completes the query  - generates instructions to extract the data from the files.
+	- executes the instructions.
+Storage Engine
+ 	- FileManager - manages all the physical files in DB
+	- MemoryManager- manages the heap/cache
+	- ThreadManager/ResourceManagers
+	- TransactionManager - Unit-of-Work ID (UoW)
+	
+
+

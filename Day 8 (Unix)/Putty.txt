@@ -1,0 +1,134 @@
+pwd[present working directory] for knowing the current working folder and
+whoami for knowing which user we are using
+ls /
+ls /bin
+ls /proc- what all processes are running on the system
+cat - echoing content, whatever we are typing it echos that, cat is taking content from input device(stdin) and dumping it back to the output device(stdout). (ctrl+c to stop)
+
+cat >> testfile --->to redirect to test file (ctrl+z to stop after giving any content)
+cat testfile --> to see or print the contents of the filename
+ls -1 --> long listing (detail listing)
+touch filename ---> for example touch file2 creates file 2
+so touch is basically to create files with 0 bytes.
+
+head -1 testfile ls --> to see the top numbers of line by default 10 lines of the file
+tail --> prints the last command of the file (to find most recent errors)
+
+man touch --> man is for manual, this gives us online manual for any 
+espfollowed by space skip to the next page
+q will stop
+
+to creat a directory-->mkdir testDir
+to navigate to that directory --> cd testDir/
+to create a new file in directory same ->> cat >> textFile.txt and type content
+
+cd command
+single dot (.) --> represents the curr directory
+.. -> represents parent
+~ -> gives us the root 
+cd testDir --> gives the testDir directory
+
+ls ->
+ls -l -> will all the files and also directory
+ls -la -> will list all the hidden files also
+ls -lh -> will display number of blocks allocated
+ls -ld -> will list all directory
+ls -lda ->
+
+rm filename -> will remove the file mentioned
+rmdir directoryname -> will remove the directory mentioned (this will delete only if the directory is empty)
+rm -R testDir -> to recursively removes the file
+rm -R -> will remove the file
+rm
+cp testFile -> copy files
+cp source destination -> is used to copy files from filename to destination
+like cp filename directoryname -> copied from file to directory
+mv source destination -> to move from source to destination
+mv testfile ./testDir/newFile (will move test file to directory)
+
+ls -l >> listingFile  --> redirect the output to a file
+[if we cat the output of the file it will show us 
+content --> cat listingFile ]
+
+ls /bin > allBinFiles (just file name taking from bin file)
+sort filename -> will sort the content of the cat (lines in the file)
+sort -r filename -> it will do an descending sort (reverse sort)
+less filename -> will show less content and to quit q (less will show us screens of information )
+
+ls /bin | less -> to pipe the output of this to another input( we can change multiple commands together )
+ls /bin | tail -> will give us last 10 from bin
+ls /bin | head -> will give us first 10 from bin
+
+find command -> is for finding the files anywhere in the directory and see if those files are existing 
+example - find /bin/a[c-f]* --> this will find the files from bin in expressions mentioned
+
+
+man sort > sortmanual(filename) --> push the output of man sort to sortmanual file (it will capture the output of "man sort" into a file
+sort sortmanual --> this will sort the sortmanual file
+to display  less pageful of information use --> sort sortmanual | less
+
+man du --> this will display the information (d estimates file space usage)
+man du | less --> will print less content of information
+to sort and display less pageful of information in a single command just write --> man du | sort | less
+
+grep - Global regular expression patterns 
+-- used for patern matching
+grep is fileName -> if my file contents "is" in the lines of my file it will display that particular line that contents "is" pattern/expression
+grep [a-z] filename ->> here [a-z] is the range of expressions used in the lines
+grep ^[a-z] filename ->> it pulls out with line begins with a-z
+grep [a-z]$ filename ->> it plulls out with line ending with range a-z
+grep [s-z.]$ filename
+grep [s-z_]$ filename
+grep X$ filename
+grep s$ filename
+grep -ws$ filename
+
+another way of creating file,->> vi editor
+vi press enter, it will present us a screen (Vi IMproved) 
+this command comes with two modes, 1.command mode -> for executing commands
+2. insert mode -> for adding content to the file.q
+
+without making any changes to exit from vi editor is --> Esc :q
+press i --> to add text
+press Esc :w filename.txt --> to save the file
+press Esc :wq --> to save the file after editing and quit 
+press vi filename --> to open the saved file
+press EscZZ --> to quickly save and exit
+hjkl --> to move cursor in the line
+press x --> to delete the character at the point of cursor
+press Esp to exit from insert mode to command modezz
+if u insert something and didn't save and press Esc :q! --> changes are not saved (quit without saving)
+
+max of unix commands are written in vi editor
+
+to run a python code in vi-->
+write any python code and save it in file.py format 
+and back in command mode execute the code by --> python3 file.py
+
+---------------------shell scripting-----------------
+save a file with test.sh in vi editor
+
+writing 
+echo hello and save as test.sh 
+if we say ./test.sh -->  it says execute permission is denied
+
+usually -rw-rw--r-- : user,group,global(owner) will not have execute permission. (read,write permissions there no execute permission)
+so to try removing read or write or adding executing permission
+
+to grant execute permission for the files
+
+x=1 w=2 r=4 total 7, 
+use command --> chmod 777 filename or chmod 751 filename 
+and list the files and observe how the x,w,r permissions have changed.
+
+fnally to execute test.sh file
+change permissions using --> chmod 764 test.sh
+and then execute by --> ./test.sh (it will run now)
+
+chown user:group filename --> to change ownership
+
+
+
+
+
+

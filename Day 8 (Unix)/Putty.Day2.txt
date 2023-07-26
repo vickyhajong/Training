@@ -1,0 +1,250 @@
+echo Hello World ->> prints Hello World irrespective of spaces
+echo "Hello        World" -->> if u use "" then spaces are considered
+echo Hello * World -> Hello    prints all files in between      World
+echo "hello * World" --> eachh value in double quotes considered as an argument and prints it all. 
+
+backtick (`) --> used for executing some commands 
+EX- echo `expr 5 + 10` --> OUTPUT : 15
+
+When defining a variable there should not be any space before or after the = symbol.
+x=10 is correct (treated as single command)
+x = 10 (treated as 3 separate commands)
+
+echo "$x"(it will be considered as single attribute) or echo $x(it can consider multiple arguments if there is a space) --> when we want to use the variable we have to write prefix $
+
+vi first.sh 
+#!/bin/sh --> write this as a default line to execute the shell (this script is targeted to run under desirable bourne shell)
+
+chmod u+rwx first.sh --> this changes the permissions and grants the permission to execute 
+./first.sh (then write this it will run the .sh file)
+
+or use --> bash first.sh (to run) [in this case we dont have to change the mode]
+
+d=a+b will print a+b
+d=`expr $a + $b` --> will print the expression and gives the sum
+
+multiple statements can be written in the same line using ;
+x=10;y=20;echo $x $y; echo "End";
+
+echo "enter ur name:"
+read name
+echo "enter ur age:"
+read age
+echo you are $name and your age is $age
+
+echo "Enter ur name [ `whoami`]:"
+read name 
+echo "ur name is: $name" 
+
+echo "ur name is ${name}" #variable substitution
+
+echo "ur name is ${name:- `whoami`}" #if name is null, it prints whoami. the variable is not set to the output of whoami. #the variable is still null/empty at this point
+
+echo "ur name is ${name:=Example}" #if name is null, set the value to "Example". If name contains value then #use the value. The value of the variable is set, if it is null.
+
+all these print Your name is Givenname (if we give the name)
+
+and if we dont give a name then only,
+echo "ur name is ${name:- `whoami`}"
+echo "ur name is ${name:=Example}" 
+these will print whoami and example 
+
+echo "Name after :- and := operator is: $name"
+
+[]- used for testing the conditions
+
+a=10
+echo [ "$a" = "10" ]
+[ "$a" = "10" ] && echo "Yes"
+
+[ $a -eq 10 ] ->> -eq is equal to check if a is equal to 10
+[ $a -lt 10 ] ->> -lt is lessthan check if a is lessthan to 10
+echo "$?" --> will print the status of the immediate previous executed command (previous commands exxit status will be maintained )
+values will be stored into this $?
+
+# eq = equal to
+# lt = less than
+# -gt greater than
+# -ne = not equal
+# -le = less than or equal
+# -ge = greater than or equal
+
+[&a -eq 10] # (space after/before [] is required)
+[ --> link for the test commmand
+# [$a is the command, which does not exists.
+
+1. 
+if [ condition ]
+then   
+       statement(s)
+fi
+
+2. 
+if [ condition ]  then
+       statement(s)
+else  
+       statement(s)
+fi
+
+3.
+if [ condition ]; then
+       statement(s)
+elif [ condition ]; then
+       statement(s)
+....
+else  
+      statement(s)
+fi
+
+4. case statement
+
+case expr in
+	label) statement(s) ;;
+	label) statement(s)
+		;;
+	*) statement(s) ;;
+esac
+
+ex-
+echo "Enter a fruit name: "
+read fruit
+case "$fruit" in
+	"apples") eb=cho "You entered appples" ;;
+	"mangoes") 
+		echo "Mangoes chosen"
+		;;
+	"water melon") echo "You chose water melon" ;;
+	*) echo "You chose $fruit";;
+esac 
+
+
+6. while : -- runs infinite loops
+while:
+do 
+	statement(s)
+done
+
+ex-  
+
+a=10
+while [ $a -gt "0" ]
+do
+        echo $a
+        a=`expr $a - 1`
+done
+
+while :
+do
+        echo "Command Name: "
+        read commandName
+        echo "Command [ $commandName ] entered."
+done
+
+
+7. for statement
+for variable in rangeOfValues 
+
+
+ex -
+
+for i in 1 2 3 4 5 6 "Name" "Place" "City"
+do
+        echo $i
+done
+
+for file in `ls`
+do
+        if [ -f $file ]; then
+                echo "File: $file"
+        elif [ -d $file ]; then
+                echo "DIRECTORY: $file"
+        else
+                echo "Unknown: $file"
+        fi
+done
+
+
+PASSING ARGUMENTS TO SCRIPTS
+- script receive the arguments a $0,$1, ... $9
+$0 - name of the script
+$1....$9 are the other arguments
+$@ -> identifiles all the arguments
+$* -> identifiles all the arguments
+bash script1.sh Edgeverve
+$0 holds -> script1.sh
+$1 -> Edgeverve
+
+Ex-
+#!/bin/sh
+#commmand line arguments and scripts
+
+echo "Scripts Name: $0"
+echo "First Argument: $1"
+echo "Second Argument: $2"
+echo "All arguments: $@"
+#alternate way to access all arguments
+echo "All Arguments: $*"
+
+#to execute
+# chmode u+rwx argumental.sh
+# ./argumental.sh Edgeverve Bangalore
+
+---to handle more than 9 arguments using shift operation---
+#!/bin/sh
+
+#Handle more than 9 arguments using shift operation
+
+echo "Script Name: $0"
+for arg in $*
+do
+        echo "Argument $1"
+        shift
+done
+
+
+
+#Process Id can be retrieved sing $$, $!
+# $$ returns the process Id
+# $! returns the last background process id
+echo "process Id: $$"
+
+run 
+1. echo $$ --> this will give process id 
+2. run the script --> 
+
+
+------------FUNCTIONS IN SHELL--------------
+#!/bin/sh
+
+#functions in shell
+
+addNumber()
+{
+        result=`expr $1 + $2`
+        echo "Function status: $result"
+}
+
+# MAIN PART OF THE SCRIPT
+echo "Functions in Scripts"
+addNumbers 10 20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

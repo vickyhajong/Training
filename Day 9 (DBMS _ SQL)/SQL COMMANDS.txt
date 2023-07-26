@@ -1,0 +1,52 @@
+SQL ------STRUCTURED QUERY LANGUAGE--------------
+1. SELECT * FROM SYSTEM.customers
+2. SELECT * FROM STSTEM.products
+3. SELECT * FROM STSTEM.categories
+4. SELECT * FROM STSTEM.orders
+5. SELECT * FROM STSTEM.order_details
+6. SELECT * FROM STSTEM.employess
+--SELECT Statement
+--SEELCT <columnList>
+--FROM <tableList>
+--WHERE <conditions>
+--GROUP BY <expressions>
+--HAVING <conditions>
+--ORDER BY <expressions>
+
+--1. PROJECTION
+--what to extraxt from the table
+
+SELECT CUSTOMERS_ID, COMPANY_NAME, CONTACT_NAME
+FROM SYSTEM.customers;
+
+-- * -> DB replaces the * from all the colum names
+--literal coloumns
+
+SELECT 'The customer', COMPANY_NAME, 'IS LOCATED IN', city
+FROM SYSTEM>customers;
+
+-- Column name alias - alternate name in the output
+SELECT CUSTOMER_ID AS CustId, COMPANY_NAME as Company,
+CITY, COUNTRY
+FROM SYSTEM.customers
+
+-- Derived Columns are supported - combining 2 or more coulmns in the output--
+SELECT CUSTOMER_CODE AS "Cust_Code",
+	CITY || ' ' || COUNTRY AS "Location"
+FROM SYSTEM.customers
+--another way
+SELECT PRODUCT_ID, PRODUCT_NAME, UNIT_PRICE,UNITS_IN_STOCK,
+(UNIT_PRICE * UNITS_IN_STOCK) AS StockValue
+FROM SYSTEM.products;
+
+
+
+
+-------In remote server-------------------
+--2. Restricitons
+-- limits the number pf rows extracted
+-- use "WHERE" clause and relational and logical operators
+SELECT Customer_Code, Company_Name, Contact_Name, City, Country
+FROM customers
+WHERE Country = 'USA';
+
