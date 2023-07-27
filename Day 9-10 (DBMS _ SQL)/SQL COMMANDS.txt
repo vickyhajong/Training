@@ -1,0 +1,348 @@
+SQL ------STRUCTURED QUERY LANGUAGE----DAY 1--------------------------------------------------------------
+1. SELECT * FROM SYSTEM.customers
+2. SELECT * FROM STSTEM.products
+3. SELECT * FROM STSTEM.categories
+4. SELECT * FROM STSTEM.orders
+5. SELECT * FROM STSTEM.order_details
+6. SELECT * FROM STSTEM.employess
+--SELECT Statement
+--SEELCT <columnList>
+--FROM <tableList>
+--WHERE <conditions>
+--GROUP BY <expressions>
+--HAVING <conditions>
+--ORDER BY <expressions>
+
+--1. PROJECTION
+--what to extraxt from the table
+
+SELECT CUSTOMERS_ID, COMPANY_NAME, CONTACT_NAME
+FROM SYSTEM.customers;
+
+-- * -> DB replaces the * from all the colum names
+--literal coloumns
+
+SELECT 'The customer', COMPANY_NAME, 'IS LOCATED IN', city
+FROM SYSTEM>customers;
+
+-- Column name alias - alternate name in the output
+SELECT CUSTOMER_ID AS CustId, COMPANY_NAME as Company,
+CITY, COUNTRY
+FROM SYSTEM.customers
+
+-- Derived Columns are supported - combining 2 or more coulmns in the output--
+SELECT CUSTOMER_CODE AS "Cust_Code",
+	CITY || ' ' || COUNTRY AS "Location"
+FROM SYSTEM.customers
+--another way
+SELECT PRODUCT_ID, PRODUCT_NAME, UNIT_PRICE,UNITS_IN_STOCK,
+(UNIT_PRICE * UNITS_IN_STOCK) AS StockValue
+FROM SYSTEM.products;
+
+
+
+
+-------In remote server-------------------
+--2. Restricitons
+-- limits the number pf rows extracted
+-- use "WHERE" clause and relational and logical operators
+SELECT Customer_Code, Company_Name, Contact_Name, City, Country
+FROM customers
+WHERE Country = 'USA';   --EQUAL
+
+SELECT Product_id, product_name, unit_price, units_in_stock
+FROM products
+WHERE unit_price > 50;
+
+SELECT Product_id, product_name, unit_price, units_in_stock
+FROM products
+WHERE unit_price < 10;
+SELECT Customer_Code, Company_Name, Contact_Name, City, Country
+FROM customers
+WHERE Country != 'USA'; --NOT EQUAL
+
+
+SELECT Product_id, product_name, unit_price, units_in_stock
+FROM products
+WHERE unit_price >= 10;
+
+-- Write a query to dispplay the list of customers residing in LONDON
+SELECT * FROM customers;
+
+SELECT * FROM customers WHERE  City = 'London';
+-- compound conditions -> and , or
+select product_id, product_name, category_id from products
+where category_id=3 or category_id=7;
+
+--and
+select product_id, product_name, unit_price, units_in_stock
+from products
+where unit_price > 50 and units_in_stock < 50;
+
+--IN --> replace multiple or conditions
+SELECT product_id, product_name, category_id
+FROM products
+-- category_id = 1 OR category_id = 2 OR category_id = 5
+WHERE category_id IN (1,2,5);
+
+SELECT product_id, product_name, category_id
+FROM products
+-- category_id != 1 OR category_id != 2 OR category_id != 5
+WHERE category_id not in (1,2,5);
+
+--Range of Value - BETWEEN
+SELECT product_id , product_name, category_id
+FROM products
+WHERE category_id BETWEEN 1 and 5;
+
+SELECT product_id , product_name, category_id
+FROM products
+WHERE category_id NOT BETWEEN 1 and 5;
+
+-- Pattern matching
+-- Wild cards %,_ (underscore)
+-- % (percentage) represents many number of characters
+-- _ (underscore) represents a single character
+
+SELECT Country FROM Customers WHERE Country LIKE 'U%';  -- starting with U
+SELECT Country FROM Customers WHERE Country LIKE '%e';  -- ending with e
+SELECT Country FROM Customers WHERE Country LIKE '%an%'; -- contains an
+SELECT Country FROM Customers WHERE Country LIKE '%an_';  -- contains an and one more charater at the end
+
+-- write a query to fetch all customers whose company names ends with d in third last place
+SELECT Company_name FROM Customers WHERE Company_name LIKE '%d__';
+
+-- write a query to fetch all customers whose company_names starts with letters between A and M
+SELECT Company_name FROM Customers WHERE Company_name BETWEEN 'A%' AND 'M%';
+
+SELECT Company_name FROM Customers WHERE Company_name LIKE '[A-M]%'; --does not work in oracle but it will work in other DB
+
+-----------------------------------------------------DAY 2--------------------------------------------------------
+-- WHERE CLAUSE
+-- list all customers who have not provided their fax numbers
+SELECT Customer_code, Company_name, Contact_name, Fax
+FROM Customers
+WHERE FAX IS NULL; -- Use is when there is absence of value #Two NULLS are not equal.
+
+---DDL STAEMENTS
+---> CREATE , ALTER, and DROP, TRUNCATE
+-----> DATATYPES in Oracle
+------->1.Character data types -> char(size), nchar(size), varvhar2(size), nvarchar2(size)
+--	 2000 bytes is the size limit
+------->2. Number types -> number(precision, scale), numeric(p,s). decimal(p,s), float, integer
+--		smallint
+------->3. DateTime types-> date, timestamp
+------->4. Other Types -> XML, table........
+------->5. Large Objects -> 408-1 bytes of storage - blob, clob, bfile
+
+
+CREATE TABLE Students
+(
+	Id INTEGER NOT NULL,
+	Stud_Name VARCHAR2(50),
+	Address VARVHAR2(100),
+	BirthDate DATE,
+	CGPA NUMERIC5(5,3)
+);
+
+--Description of the table
+DESC Students;  -- DESC Tablename 
+--to see the table description
+--INSERT Values into the table (DML)
+INSERT INTO Students VALUES(1, 'SOMEONE', 'Address', '23-JUN-2023', 9.765);
+SELECT * FROM Students;
+INSERT INTO Students (Id, CGPA,BirthDate, Address, Stud_name)
+VALUES(2, 6.665, '23-JUN-2023', 'Bengaluru', 'Student X');
+SELECT * FROM Students;
+
+INSERT INTO Students (Id,Stud_name,Address, BirthDate, CGPA)
+SELECT CUSTOMER_ID, COMPANY_NAME, CITY || ' - ' || COUNTRY, '01-JAN-1999' , 5.0
+FROM Customers;
+SELECT  * FROM Students;
+
+-- UPDATE (DML)
+-- FOR Updating all rows in tha table
+UPDATE Students
+    SET CGPA = 1.0;
+
+UPDATE Students
+    SET CGPA = 5.0
+    WHERE Id BETWEEN 10 AND 20;
+SELECT * FROM students;
+
+-- DELETE rows from the table
+DELETE FROM Students -- Without a condition  - all, rows will be deleted
+WHERE CGPA = 1.0;
+
+
+
+TRUNCATE TABLE Sudents; --remove all the rows form the table without options of recovery
+-- DELETE FROM table name - rows can be recovered
+-- Truncate removes all the rows , but retains the table structure, indexes and other table objects
+
+
+-- Constraints - Integrity Constraints and keys
+-- validated the data - ensures the data stored is valid.
+-- Entity Integrity
+	-- each row uniquely identifiable and contains unique values.
+	-- Enforced using Primary Key Constraints
+--Domain Integrity
+	-- Ensures that the value held by an attribute belongs to the domain.
+	-- The values Falls within the domain boundary
+	-- Enforces using CHECK constraints.
+-- Referential Integrity
+	-- ensures that a value held byan attribute belongs to another entity
+	-- the details can be traced/tracked to another entity
+	-- Enforced using foreign key constraints.
+
+
+
+CREATE TABLE ConstraintTb1
+(
+	Id INTEGER NOT NULL,
+	Name VARCHAR(50) NOT NULL,
+	Status CHAR(1) DEFAULT 'Y', -- Status can be  Y(es), N(o), P(ending)
+	CashInHand NUMERIC(10,2) DEFAULT 0,
+	-- Define a Primary Key in Id
+	-- CONSTRAINT constraintname PRIMARY KEY (Column list)
+	CONSTRAINT pk_ConstraintTb1_Id PRIMARY KEY (Id)
+	-- Define a check contraint to ensure Status is Y/N/P
+	-- CONSTRAINT constraintName CHECK (condition)	
+ 	CONSTRAINT ck_ConstraintTb1_Status 
+		CHECK (Status IN ('Y', 'y', 'N', 'n', 'P', 'p')),
+	CONSTRAINT ck_ConstraintTb1_CashInHand 
+		CHECK (CashInHAnd > 0)  
+
+);
+
+INSERT INTO ConstraintTb1 VALUES(1, 'sample', 'Y', 1.0); -- Rows inserted bcz 
+INSERT INTO ConstraintTb1 VALUES(1, 'sample', 'X', 1.0); -- Fails - status
+INSERT INTO ConstraintTb1 VALUES(1, 'sample', 'Y', -1.0); -- Fails Cash
+INSERT INTO ConstraintTb1 VALUES(1, 'sample', 'P', 1.0); -- Fails - primary key
+SELECT * from constrainttb1;
+
+
+-- Add another constraint on the Name column. The name should be unique in the table
+ALTER TABLE ConstraintTb1
+ADD CONSTRAINT uq_ConstraintTb1_Name UNIQUE (Name);
+
+INSERT INTO ConstraintTb1 VALUES(2, 'Sample U', 'p', 1.0);
+INSERT INTO ConstraintTb1 VALUES(3, 'Sample U', 'p', 1.0); --Fails on Name
+
+/*
+ALTER TABLE TableName
+ADD (ColumnName CoulumnType, .......)
+MODIFY (ColumnName ColumnType,......)
+DROP (ColumnName ,......)
+RENAME COLUMN ColumnName TO NewColumnName
+
+ADD CONSTRAINT <constraintName> PRIMARY KEY|CHECK|UNIQUE|FOREIGN KEY (....)
+DROP CONSTRAINT <constraintName>
+DISABLE CONSTRAINT constraintName
+ENABLE CONSTRAINT constrainName
+*/
+
+-- Rename Tablename to NewTableName
+*/
+-- ADD a new column
+ALTER TABLE ConstraintTb1 ADD (Location VARCHAR(50) );
+DESC ConstraintTb1;
+-- MODIFY existing column
+ALTER TABLE ConstraintTb1 MODIFY (Location VARCHAR(100));
+DESC ConstraintTb1
+-- rename a column
+ALTER TABLE ConstraintTb1 RENAME COLUMN Location to Address;
+DESC ConstraintTb1;
+-- Disable constraint
+ALTER TABLE ConstraintTb1 DISABLE CONSTRAINT uq_ConstraintTb1_Name;
+INSERT INTO ConstraintTb1 VALUES(10, 'Sample', 'N', 1); 
+
+-- REMOVE THE TABLE
+--DROP
+DROP TABLE ConstraintTb1;
+DESC ContraintTb1;
+
+-- 
+DELETE FROM ConstraintTb1 WHERE Id=0;
+ALTER TABLE ConstraintTb1 ENABLE CONSTRAINT uq_ConstraintTb1_Name;
+
+---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=--=-==--=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=
+
+CREATE TABLE Authors
+(
+    AU_ID INTEGER NOT NULL,
+    AU_NAME VARCHAR2(20),
+    AU_ADDR VARCHAR2(100)
+);
+CREATE TABLE Books
+(
+    BK_ID INTEGER NOT NULL,
+    BK_TITLE VARCHAR2(20),
+    BK_PRICE NUMERIC(10,2),
+    ISBN VARCHAR(15)
+);
+
+CREATE TABLE BookAuthors
+(
+    AU_ID INTEGER,
+    BK_ID INTEGER
+);
+
+ALTER TABLE Authors ADD CONSTRAINT pk_Authors_AU_ID PRIMARY KEY (AU_ID);
+ALTER TABLE Books ADD CONSTRAINT pk_Books_BK_ID PRIMARY KEY (BK_ID);
+ALTER TABLE BookAuthors ADD CONSTRAINT pk_BookAuthors_ID PRIMARY KEY (AU_ID, BK_ID);
+
+-- Foreign key
+
+ALTER TABLE BookAuthors
+ADD CONSTRAINT fk_BookAuthors_AU_ID
+FOREIGN KEY (AU_ID) REFERENCES Authors (AU_ID)
+ON DELETE CASCADE;
+
+ALTER TABLE BookAuthors
+ADD CONSTRAINT fk_BookAuthors_BK_ID
+FOREIGN KEY (BK_ID) REFERENCES Books (BK_ID)
+ON DELETE SET NULL;
+
+INSERT ALL
+    INTO Authors VALUES(1, 'Author 1', 'Bengaluru')
+    INTO Books VALUES(2, 'Book 1', 1 , 'ISBN')
+SELECT * FROM DUAL;
+
+INSERT INTO BookAuthors (AU_ID, BK_ID) VALUES (1,1);
+INSERT INTO BookAuthors (AU_ID, BK_ID) VALUES (1,2);
+SELECT * FROM BookAuthors;
+
+DELETE FROM Authors;
+SELECT * FROM BookAuthors;
+
+-- STRING FUNCTIONS
+-- LENGTH, LPAD, RPAD, LTRIM, RTRIM, TRIM, UPPER, LOWER, REPLACE,
+
+SELECT COMPANY_NAME, LENGTH(COMPANY_NAME) FROM CUSTOMERS;
+SELECT CITY, RPAD(CITY, 50) FROM CUSTOMERS;
+SELECT CITY, LPAD(CITY, 50) FROM CUSTOMERS;
+SELECT CITY, UPPER(CITY), LOWER(CITY), INITCAP(CITY) FROM CUSTOMERS;
+SELECT DISTINCT COUNTRY FROM CUSTOMERS;
+SELECT DISTINCT REPLACE(COUNTRY, 'e', '#') FROM CUSTOMERS;
+SELECT COMPANY_NAME, SUBSTR(COMPANY_NAME, 6, 5) FROM CUSTOMERS;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
