@@ -17,7 +17,7 @@ CREATE TABLE BankCustomers
  --------------------------------Q2------------------------------------------------------
  CREATE TABLE AccountTypes
  (
- 	AccType_Id INTEGER NOT NULL,
+ 	 AccType_Id INTEGER NOT NULL,
     AccType_Name VARCHAR2(20)
  );
  ---------------------------------Q3-----------------------------------------------------
@@ -27,6 +27,7 @@ CREATE TABLE BankCustomers
     Cust_Id INTEGER NOT NULL,
     AccType_Id INTEGER NOT NULL,
     Opened_Date DATE,
+    Cur_Date DATE DEFAULT SYSDATE, -- created to store current date.
     Current_Balance NUMERIC(10,2)
  );
  -----------------------------------Q4a-------------------------------------------------
@@ -39,7 +40,7 @@ CREATE TABLE BankCustomers
  ALTER TABLE Accounts ADD CONSTRAINT pk_Acc_Id PRIMARY KEY (Acc_Id);
  ALTER TABLE Accounts ADD CONSTRAINT fk_Cust_Id FOREIGN KEY (Cust_Id) REFERENCES BankCustomers (Customer_Id) ON DELETE CASCADE;
  ALTER TABLE Accounts ADD CONSTRAINT fk_AccType_Id FOREIGN KEY (AccType_Id) REFERENCES AccountTypes (AccType_Id) ON DELETE CASCADE;
- ALTER TABLE Accounts ADD CONSTRAINT Opened_Date CHECK (Opened_Date <= '31-DEC-2023');  -- Current_Date returns dynamic value so we cant use it to compare directly with the 'Opened_Date'. 
+ ALTER TABLE Accounts ADD CONSTRAINT Opened_Date CHECK (Opened_Date <= Cur_Date); 
  ALTER TABLE Accounts ADD CONSTRAINT Current_Balance CHECK (Current_Balance > 0);
  
  --------------------------------------Q5------------------------------------------------
