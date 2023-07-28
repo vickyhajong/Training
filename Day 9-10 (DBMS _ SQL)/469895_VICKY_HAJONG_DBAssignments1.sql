@@ -39,7 +39,7 @@ CREATE TABLE BankCustomers
  ALTER TABLE Accounts ADD CONSTRAINT pk_Acc_Id PRIMARY KEY (Acc_Id);
  ALTER TABLE Accounts ADD CONSTRAINT fk_Cust_Id FOREIGN KEY (Cust_Id) REFERENCES BankCustomers (Customer_Id) ON DELETE CASCADE;
  ALTER TABLE Accounts ADD CONSTRAINT fk_AccType_Id FOREIGN KEY (AccType_Id) REFERENCES AccountTypes (AccType_Id) ON DELETE CASCADE;
- ALTER TABLE Accounts ADD CONSTRAINT Opened_Date CHECK (Opened_Date <= current_date); 
+ ALTER TABLE Accounts ADD CONSTRAINT Opened_Date CHECK (Opened_Date <= '31-DEC-2023');  -- Current_Date returns dynamic value so we cant use it to compare directly with the 'Opened_Date'. 
  ALTER TABLE Accounts ADD CONSTRAINT Current_Balance CHECK (Current_Balance > 0);
  
  --------------------------------------Q5------------------------------------------------
