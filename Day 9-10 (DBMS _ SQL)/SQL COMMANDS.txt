@@ -23,7 +23,7 @@ FROM SYSTEM.customers;
 --literal coloumns
 
 SELECT 'The customer', COMPANY_NAME, 'IS LOCATED IN', city
-FROM SYSTEM>customers;
+FROM SYSTEM.customers;
 
 -- Column name alias - alternate name in the output
 SELECT CUSTOMER_ID AS CustId, COMPANY_NAME as Company,
