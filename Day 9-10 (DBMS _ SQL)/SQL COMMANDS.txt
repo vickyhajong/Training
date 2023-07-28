@@ -434,6 +434,87 @@ HAVING COUNT(Customer_id) > 5
 ORDER BY "COUNTRY" DESC;
 
 
+----JOIN----
+--MATCHING VALUES ONLY - INTERSECTION - INNER JOIN
+--MATCHING VALUES + All other ELEMENTS - UNION - FULL OUTER JOIN 
+--MATCHING VALUES + ALL OTHER ELEMENTS FROM RIGHT SIDE - RIGHT OUTER JOIN
+--MATCHING VALUES + ALL OTHER ELEMENTS FROM LEFT SIDE - LEFT OUTER JOIN
+--EACH ELEMENT FROM A SET MULTIPLIED WITH ALL THE OTHER ELEMENTS OF THE OTHER SET -> CARTESIAN PRODUCT->CROSS 
+--PRODUCT
+-- IF THE JOIN CONDITION IS BASED ON EUALITY(=) , IT IS  CALLED EQUI-JOIN
+-- IF THE JOIN CONDITION IS NOT BASED ON EQUALITY(=), IT IS CALLED NON EQUI JOIN
+-- ID A SET JOINS BACK TO ITSELF VIRTUALLY - SELF JOIN
+
+CREATE TABLE States (Id INTEGER, StateName varchar2(50));
+CREATE TABLE Cities (Id Integer, cityName varchar2(50), StateId INTEGER );
+
+INSERT ALL
+	INTO States VALUES (101, 'Karnataka')
+	INTO States VALUES (101, 'Maharastra')
+	INTO States VALUES (101, 'Rajasthhan')
+	INTO States VALUES (101, 'odisha')
+	INTO States VALUES (101, 'Bengaluru')
+	INTO Cities VALUES (444, 'Bengaluru', 101)
+	INTO Cities VALUES (555, 'Mumbai', 102)
+	INTO Cities VALUES (666, 'jaipur', 103)
+	INTO Cities VALUES (777, 'Pune', 102)
+	INTO Cities VALUES (888, 'Lucknow', NULL)
+SELECT * FROM DUAL; 
+SELECT * FROM States;
+SELECT * FROM Cities;
+
+
+-- INNER JOIN
+SELECT S.id, S.Statename, C.Id, C.CityName,C.stateid
+FROM States S INNER JOIN Cities C ON S.Id = C.StateId;
+-- FULL OUTER JOIN - UNION
+SELECT S.id, S.Statename, C.Id, C.CityName,C.stateid
+FROM States S FULL OUTER JOIN Cities C ON S.Id = C.StateId;
+--LEFT OUTER JOIN
+SELECT S.id, S.Statename, C.Id, C.CityName,C.stateid
+FROM States S LEFT OUTER JOIN Cities C ON S.Id = C.StateId;
+--RIGHT OUTER JOIN
+SELECT S.id, S.Statename, C.Id, C.CityName,C.stateid
+FROM States S RIGHT OUTER JOIN Cities C ON S.Id = C.StateId;
+--CROSS JOIN
+SELECT S.id, S.Statename, C.Id, C.CityName,C.stateid
+FROM States S, Cities C;
+
+-- List the product and the category details
+-- Use Products and categories ON P.category_Id = C.Category_Id
+
+SELECT P.Product_id, p.product_name, c.category_id, c.category_name
+FROM  Products p inner join categories c on p.category_id = c.category_d; 
+
+SELECT P.Product_id, p.product_name, c.category_id, c.category_name
+FROM  Products p 
+inner join categories c on p.category_id = c.category_d
+inner join Order_details od on od.product_id = p.product_id;
+
+--views 
+--store the query definations
+-- data is not stored
+
+CREATE VIEW vw_ThreeTableJoin
+AS (SELECT P.Product_id, p.product_name, c.category_id, c.category_name,od.order_id
+FROM  Products p 
+inner join categories c on p.category_id = c.category_d
+inner join Order_details od on od.product_id = p.product_id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
