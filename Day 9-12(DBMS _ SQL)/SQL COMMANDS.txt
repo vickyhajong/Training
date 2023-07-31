@@ -502,6 +502,72 @@ inner join categories c on p.category_id = c.category_d
 inner join Order_details od on od.product_id = p.product_id);
 
 
+---------------------------------DAY 4----------------------------------------------------------------
+
+--DBA DATABASE ADMINISTRATOR
+
+--datafile file extension is .dbf.
+
+DCL - DATA CONTROl LANGUAGE 
+Grant, Revoke
+
+select name,open_mode from v$database;
+select * from v$database;
+
+-- 8i,91 - i indicates internet
+-- 10g,11g - grid
+-- 12c,19c,21c - cloud 
+-- two types of database container and non container cdb and pdb(plugable database)
+sho con_name
+sho pdbs
+--  
+CREATE USER C##ADDY IDENTIFIED BY A; --  THERE ARE TWO ROLES COMMON AND LOCAL, IF U ARE USING COMMON THEN USE C##
+-- IN PREVIOUS VERSIONS U CAN DIRECTLY CREATE A USER.
+GRANT CREATE SESSION TO C##ADDY;
+SELECT * FROM SESSION_PRIVS;
+
+GRANT CREATE TABLE TO C##ADDY;
+ALTER USER C##ADDY DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS;  -- alter is used whenever users privellge error are encountered
+ALTER USER C##ADDY IDENTIFIED BY 123; 
+-- renaming a username cannot be done but we can first drop a user and create a new user;
+
+create user c##smith identified by s;
+drop user c##smith;
+drop user c##addy; -- this will throw error if the user is already in the session
+-- one more thing to note is that if aby data have veen created in the addy then it will ask for the CASCADE
+--below is the solution
+drop user c##addy cascade;
+grant connect to c##addy; 
+grant resource to c##addy;
+revoke resource from c##ADDY;
+revoke connect from c##addy; -- the most basic privilege is create session.
+grant connect to c##addy,c##smith; --multiuser
+grant connect,resource to c##addy,c##smith; --multi roles and multiuser;
+
+grant create session,create table to c##addy,c##smith; --multi privileges and multiuser
+
+alter user c##addy account lock;
+alter user c##addy account unlock;
+
+
+
+grant select on c##addy.infi to c##smith; -- granting another user to accesss table .
+grant update on c##addy.infi to c##smith;
+grant delete on c##addy.infi to c##smith;
+
+-- all  DDL commands are auto commit
+create role c##myrole; -- our own customized role;
+grant create session,create table to c##myrole;
+grant c##myrole to c##addy,c##smith;
+drop role c##myrole;
+
+
+
+
+
+
+
+
 
 
 

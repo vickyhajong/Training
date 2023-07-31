@@ -1,0 +1,30 @@
+RDBMS Assignment  - 1
+
+(N) = NUmber, (T) = VARCHAR2, (D) = Date
+1. Create a table called BankCustomers which should store the following data: 
+	Customer_Id (N), First_Name (T), Last_Name (T), Contact_Number (T), Addr_Line1 (T), 
+	Addr_Line2 (T), City (T), State (T), PostalCode (T). 
+2. Create a table called AccountTypes which should store the following details - AccType_Id  (N), AccType_Name (T)
+3. Create a table called Accounts which should store the following details 
+	- Acc_Id (N), Cust_Id (N), AccType_Id (N), Opened_Date (D), Current_Balance (N)
+4. Alter the tables to set the following constraints : 
+	a. BankCustomers 
+		- set Customer_Id as primary key, 
+		- set Contact_Number as Unique 
+	b. AccountTypes 
+		- set AccType_Id as primary key 
+		- set AccType_Name as unique 
+	c. Accounts 
+		- set Acc_ID as primary key 
+		- Cust_Id as Foreign Key to BankCustomers table , 
+		- AccType_Id as foreign key to AccountTypes table, 
+		- Opened_Date should be less than current_date, 
+		- check that current_balance should be greater than 0 
+5. Insert 2 rows into AccountTypes table One for AccType_Name as 'Savings' and another for 'Current'
+6. Insert rows into BankCustomers table  - add some 5 rows into the table 
+7. Insert rows into Accounts table - add some 5 rows into the table, one for each BankCustomer 
+8. Show all the rows from Account Types
+9. Show All the rows from Bank Customers 
+10. Show All the rows from Accounts 
+11. LIst all the rows in Accounts for Savings type
+12. LIst all the rows in Accounts for Current type

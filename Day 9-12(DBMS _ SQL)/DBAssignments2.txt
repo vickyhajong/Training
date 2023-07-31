@@ -1,0 +1,22 @@
+DB Assignments 2
+built-in functions and group by clauses:
+1. Write a query to display all the orders placed first 15 days of a month. 
+2. Write a query to display the orders placed in January 1998 
+3. Write a query to display the orders placed in the third week of each month of 1997 
+4. Write a query to display the number of orders placed in each month of 1996,1997 and 1998. 
+5. Write a query to display the number of orders placed in each year 
+6. Write a query to display the number of orders placed by each customer 
+7. Write a query to display the number and value of orders placed [ Use order_details table ]
+
+Joins: 
+8. Write a query to display the following details from customers and orders table 
+OUTPUT: Customer_Code, Company_Name, Order_Id, Order_Date 
+HINT: Customers (Customer_Id), Orders (Customer_Id)
+9. Write a query to display the list of customers and the number of orders placed by them as follows: 
+OUTPUT: Customer_Code, Company_Name, CountOfOrders 
+NOTE: If the customer has not placed any orders, the CountOfOrders should display 0.
+HINT: use outer join and its variations. Customers (Customer_Id), Orders (Customer_id)
+10. Write a query to display the value of each order using Orders and Order_details table
+OUTPUT: OrderId, OrderValue (SUM(UNITPRICE*QUANTITY))
+HINT: Orders (Order_ID), Order_details (Order_ID) 
+11. 
