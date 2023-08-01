@@ -743,7 +743,17 @@ sho user;
 alter session set container=cdb$root;
 select * from dba_tablespaces;
 select name,open_mode from v$database;
-alter pluggable database open;s
+alter pluggable database open;
+
+select * from v$log;
+-- maximum 5 members in each group
+-- current - transaction is happening
+-- active - transaction is full now ready to override
+-- inactive - no transaction have occured
+-- unused - never been used
+-- groups if first group is filled then then it will move to second one then third one;
+-- and when all this groups are filled then archive group comes into picture;
+
 
 
 
