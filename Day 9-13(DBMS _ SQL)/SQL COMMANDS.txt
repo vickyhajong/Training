@@ -562,6 +562,188 @@ grant c##myrole to c##addy,c##smith;
 drop role c##myrole;
 
 grant dba to c##addy;
+grant dba to c##addy;
+
+
+create user c##user1 identified by u1;
+create user c##user2 identified by u2;
+create user c##user3 identified by u3;
+
+create role c##roles;
+grant connect,resource to c##roles;
+grant c##roles to c##user1,c##user2,c##user3;
+
+revoke c##roles from c##user2;
+grant c##roles to c##user2;
+
+alter user c##user1 default tablespace users quota unlimited on users;
+alter user c##user2 default tablespace users quota unlimited on users;
+alter user c##user3 default tablespace users quota unlimited on users;
+
+grant select,insert,update on c##user1.tab1 to c##user2,c##user3;
+alter user c##user2 account lock;
+alter user c##user2 account unlock;
+
+alter user c##user3 identified by u123;
+
+create user c##monika identified by macchar;
+drop user c##monika;
+
+
+---------------------------------------------------------
+---------------------------------------------------------
+select * from dba_users;
+desc dba_users;
+desc dba_tablespaces;
+select * from dba_tablespaces;
+select * from dba_data_files;
+select * from dba_temp_files;
+
+create tablespace infytbs datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\infy1.DBF' size 50m;
+alter tablespace infytbs add datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\infy2.DBF' size 40m;
+alter tablespace infytbs drop datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\infy2.DBF';
+
+select tablespace_name, status from dba_tablespaces;
+alter tablespace users offline;
+alter tablespace users online;
+
+alter user c##addy default tablespace infytbs quota unlimited on infytbs;
+select username,default_tablespace from dba_users where username='C##ADDY'; -- to check the tablespace
+
+
+
+-------------------------------------------------------------------------------------------------------------
+------------------------------------------------- DAY 5------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+
+sho user;
+
+select * from dba_tablespaces;
+select * from dba_data_files;
+select * from dba_temp_files;
+create tablespace demotbs datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\demo1.DBF' size 50m;
+create tablespace testtbs datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\test1.DBF' size 60m autoextend on;
+alter tablespace testtbs add datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\test2.DBF' size 20m;
+alter tablespace testtbs drop datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\test2.DBF';
+create undo tablespace undotbs2 datafile  'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\undo2.DBF' size 70m;
+alter tablespace undotbs2 add datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\undo3.DBF' size 20m;
+alter tablespace undotbs2 drop datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\undo3.DBF' ;
+create temporary tablespace temp2 tempfile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\TEMP02.DBF' size 50m; 
+alter tablespace temp2 add tempfile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\TEMP03.DBF' size 10m;
+select * from tab;
+select * from session_privs;
+select username,default_tablespace from dba_users;
+alter tablespace infytbs  offline;
+alter tablespace users offline;
+alter tablespace users online;
+alter tablespace users read only;
+alter tablespace infytbs read only;
+select tablespace_name,status from dba_tablespaces;
+alter tablespace infytbs read write;
+select TABLESPACE_NAME,STATUS,BIGFILE from dba_tablespaces;
+create bigfile tablespace bigtbs datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\big01.DBF' size 50m;
+alter tablespace bigtbs add datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\big01.DBF' size 50m; -- you cannot add a datafile to a bigspace
+alter tablespace bigtbs drop datafile 'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\big01.DBF'; -- if only one datafile then u cannot drop.
+alter tablespace bigtbs offline;
+alter tablespace bigtbs online;
+desc dba_data_files;
+select tablespace_name,file_name,bytes from dba_data_files;
+select tablespace_name,file_name,bytes/1024 from dba_data_files; -- kilobyte
+select tablespace_name,file_name,bytes/1024/1024 from dba_data_files; -- megabyte
+select tablespace_name,file_name,bytes/1024/1024/1024 from dba_data_files; -- gigabyte
+
+select tablespace_name,status,bigfile from dba_tablespaces;
+drop tablespace demotbs;
+drop tablespace testtbs including contents and datafiles; -- if u have any data in that tablespace then use this command;
+drop tablespace infytbs including contents and datafiles;
+create tablespace infytbs datafile  'C:\APP\ADMINISTRATOR\VIRTUAL\ORADATA\ORCL\infy.DBF' size 50m;
+select * from dba_users;
+
+
+select * from v$controlfile;
+-- .dbf is datafile
+-- .ctl is control file
+-- .log is log file
+select * from v$log;
+select * from v$logfile;
+-- archived log. when online redo log is filled then it will goto archived log, it is a huge capacity. by dEFAULT it is disabled.
+-- duplexed archived log just an addition to archived log
+-- purpose of redo log is to recover the instaance;
+
+--flashback log. u can flashback the table
+create table infi (id number(10));
+insert into infi values(23);
+drop table infi;
+flashback table infi to before drop;
+-- RMAN (Recovery manager) it is the recovery tool to recover instances;
+-- database listener is the intermediate between user process and server process;
+-- system global area (SGA)
+-- shared pool--what ever query we write will be stored in shared pool.
+-- query optimizer optimizes the path of execution;
+-- library cache stores the query
+-- if query already present in library cache then no need to syntax,semantics etc checking
+-- there are hard and soft parsing.
+-- database Buffer cache only deals with datafiles.when it reaches the limit the database writer will push to the database and temporary files storage
+-- redo log buffer-- any changes make to the data it will make the copy of data.
+-- LGWR log writer will write the redo logs into the redo log storage;
+-- LRU least recently useed list
+-- checkpoint queue some crtical operations are stored
+-- inout and output are stored in stream pools
+-- sort extent pool will use sorting and requirements of entending the tablaspace
+
+-- PGA program global area 
+-- it has stack space;
+-- query optimizer will find the best way to excute the query;
+-- it stores the user session data.
+--
+
+
+--------------12c------------------
+
+
+
+
+
+
+
+
+
+-----------------------------------------
+
+--> No mount 
+    -- Pfile/spfile
+    -- Instance get started
+    -- it countains database control files etc. (instance is a combination of background processes) pga,sga background processes are included in it)
+
+--> Mount
+    -- control will be read
+    -- archive log enable/disable.
+    -- Flashback ON/OFF
+    
+--> Open
+    -- Databse is open
+    --transaction is open
+    -- Database is up and running
+    
+    
+-- sys as sysdba
+-- shu immediate
+-- startup nomount
+--alter database mount
+-- archive log list;
+-- alter databse archivelog
+-- alter database open
+-- alter databse close   (it will change to mounted)
+-- alter databse dismount. (mount --> nomount)
+-- startup (directly to open mode);
+
+sho con_name;
+alter session set container=orclpdb;
+sho user;
+alter session set container=cdb$root;
+select * from dba_tablespaces;
+select name,open_mode from v$database;
+alter pluggable database open;s
 
 
 
