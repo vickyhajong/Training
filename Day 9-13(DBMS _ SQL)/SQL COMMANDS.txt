@@ -755,9 +755,9 @@ select * from v$log;
 -- and when all this groups are filled then archive group comes into picture;
 
 
-
-
-
+select curren_scn from v$database; --system change number
+select sysdate from dual;
+select current_timestamp from dual;
 
 
 
