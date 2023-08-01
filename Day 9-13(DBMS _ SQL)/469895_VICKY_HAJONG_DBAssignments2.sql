@@ -3,7 +3,7 @@
 --DB Assignments 2
 --Q1 Write a query to display all the orders placed first 15 days of a month.
 
-    SELECT * FROM ORDERS;
+    SELECT * FROM ORDERS
     WHERE EXTRACT(DAY FROM ORDER_DATE) <=15
     ORDER BY ORDER_DATE ASC;
 
@@ -16,7 +16,7 @@
 --Q3 Write a query to display the orders placed in the third week of each month of 1997 
 
     SELECT * FROM ORDERS
-    WHERE TO_CHAR(ORDER_DATE, 'W') = 3;
+    WHERE TO_CHAR(ORDER_DATE, 'W') = 3
     ORDER BY ORDER_DATE ASC;
 
 --Q4 Write a query to display the number of orders placed in each month of 1996,1997 and 1998.

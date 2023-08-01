@@ -561,6 +561,8 @@ grant create session,create table to c##myrole;
 grant c##myrole to c##addy,c##smith;
 drop role c##myrole;
 
+grant dba to c##addy;
+
 
 
 
